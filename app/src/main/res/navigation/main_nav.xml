@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_nav"
+            app:startDestination="@id/firstFragment">
+
+    <fragment android:id="@+id/firstFragment" android:name="hs.khosbayar.droidjetpack.first.FirstFragment"
+              android:label="fragment_first" tools:layout="@layout/fragment_first">
+        <action android:id="@+id/action_firstFragment_to_secondFragment" app:destination="@id/secondFragment"
+                app:launchSingleTop="false"/>
+        <action android:id="@+id/action_firstFragment_to_employeeFragment" app:destination="@id/employeeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/secondFragment" android:name="hs.khosbayar.droidjetpack.second.SecondFragment"
+              android:label="fragment_second" tools:layout="@layout/fragment_second">
+        <argument android:name="chosenNumber" app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/employeeFragment" android:name="hs.khosbayar.droidjetpack.employee.EmployeeFragment"
+              android:label="EmployeeFragment">
+        <action android:id="@+id/action_employeeFragment_to_employeeDetailsFragment"
+                app:destination="@id/employeeDetailsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/employeeDetailsFragment"
+              android:name="hs.khosbayar.droidjetpack.details.EmployeeDetailsFragment"
+              android:label="EmployeeDetailsFragment">
+        <argument android:name="employee" app:argType="hs.khosbayar.droidjetpack.network.Employee"/>
+    </fragment>
+</navigation>
