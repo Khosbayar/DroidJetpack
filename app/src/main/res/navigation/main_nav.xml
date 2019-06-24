@@ -22,6 +22,6 @@
     <fragment android:id="@+id/employeeDetailsFragment"
               android:name="hs.khosbayar.droidjetpack.details.EmployeeDetailsFragment"
               android:label="EmployeeDetailsFragment">
-        <argument android:name="employee" app:argType="hs.khosbayar.droidjetpack.network.Employee"/>
+        <argument android:name="employee" app:argType="hs.khosbayar.droidjetpack.data.Employee"/>
     </fragment>
 </navigation>

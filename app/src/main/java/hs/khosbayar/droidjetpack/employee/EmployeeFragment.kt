@@ -7,13 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import hs.khosbayar.droidjetpack.R
+import hs.khosbayar.droidjetpack.data.DroidRoomDatabase
+import hs.khosbayar.droidjetpack.data.EmployeeLocalCache
+import hs.khosbayar.droidjetpack.data.EmployeeRepository
 import hs.khosbayar.droidjetpack.databinding.FragmentEmployeeBinding
 import hs.khosbayar.droidjetpack.details.EmployeeDetailsFragmentArgs
+import hs.khosbayar.droidjetpack.network.EmployeeApi
+import hs.khosbayar.droidjetpack.network.EmployeeApiService
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +32,10 @@ class EmployeeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentEmployeeBinding.inflate(inflater)
-        val factory = EmployeeViewModelProviderFactory()
+        val application = requireNotNull(this.activity).application
+        val factory = EmployeeViewModelProviderFactory(EmployeeRepository(EmployeeApi.retrofitService,
+            EmployeeLocalCache(DroidRoomDatabase.getDatabase(application).employeeDao())
+        ))
         val viewModel = ViewModelProviders.of(this, factory).get(EmployeeViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -41,6 +50,14 @@ class EmployeeFragment : Fragment() {
             list ->
             list?.let {
                 adapter.submitList(list)
+            }
+        })
+
+        viewModel.networkError.observe(this, Observer {
+            error ->
+            error.let {
+                if(error!="")
+                    Toast.makeText(context, "Oops: $error", Toast.LENGTH_LONG).show()
             }
         })
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hs.khosbayar.droidjetpack.databinding.ListItemEmployeeBinding
-import hs.khosbayar.droidjetpack.network.Employee
+import hs.khosbayar.droidjetpack.data.Employee
 
 class EmployeeAdapter(val clickListener: EmployeeOnClickListener) : ListAdapter<Employee, EmployeeAdapter.EmployeeViewHolder>(EmployeeDiffCallback()) {
 

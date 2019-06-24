@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [LuckyNumber::class], version = 1)
+@Database(entities = [LuckyNumber::class, Employee::class], version = 1, exportSchema = false)
 public abstract class DroidRoomDatabase : RoomDatabase(){
 
     abstract fun luckyNumberDao() : LuckyNumberDao
-
+    abstract fun employeeDao() : EmployeeDao
 
     companion object {
         @Volatile
